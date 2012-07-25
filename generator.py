@@ -8,12 +8,15 @@
 
 from __future__ import division
 
-import sys, glob, os, time
-
+# Imports
+import os
+import sys
+import time
+import glob
 from math import ceil
 import markdown2
 
-# config
+# Config Var(s)
 postsPerPage = 10
 
 # loads up header and footer
