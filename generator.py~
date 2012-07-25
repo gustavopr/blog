@@ -17,13 +17,11 @@ import markdown2
 postsPerPage = 10
 
 # loads up header and footer
-f = open("header.txt", "r")
-html_header = f.read()
-f.close()
+with open('header.txt', 'r') as f:
+	html_header = f.read()
 
-f = open("footer.txt", "r")
-html_footer = f.read()
-f.close()
+with open('footer.txt', 'r') as f:
+	html_footer = f.read()
 
 
 def markdown(string):
@@ -40,9 +38,8 @@ def createPost(url, body):
 	body = body.replace("<h1 class=\"title\"><a href=" + url + " class=\"titlelink\">", "<h1 class=\"title\">")
 
 	# write the html file
-	f = open(url, "w")
-	f.write(html_header + body.encode('utf-8') + html_footer)
-	f.close()
+	with open(url, 'w') as f:
+		f.write(html_header + body.encode('utf-8') + html_footer)
 
 def createHTML(root_dir):
 	# sort files by mtime
@@ -69,9 +66,8 @@ def createHTML(root_dir):
 			post = files[i + (page - 1) * postsPerPage]
 			postDate = time.strftime(" - %d %b, %Y", time.localtime(os.stat(post[1]).st_mtime))
 
-			f = open(post[1],"r")
-
-			body = str(markdown(f.read()))
+			with open(post[1], 'r') as f:
+				body = str(markdown(f.read()))
 
 			# create post footer
 			body = body + "\n<div id=\"post-footer\"><p id=\"date-time\">" 
@@ -89,8 +85,6 @@ def createHTML(root_dir):
 
 			# put it all together
 			HTML = HTML + body
-
-			f.close()
 
 		# puts navigation through pages in the bottom
 		if page == 1 and int(ceil(totalPosts / postsPerPage)) > 1:
