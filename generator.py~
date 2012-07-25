@@ -42,7 +42,7 @@ def createPost(url, body):
 	# write the html file
 	f = open(url, "w")
 	f.write(html_header + body.encode('utf-8') + html_footer)
-	f.close
+	f.close()
 
 def createHTML(root_dir):
 	# sort files by mtime
@@ -113,13 +113,13 @@ def createHTML(root_dir):
 		if page == 1:
 			f = open("index.html", "w")
 			f.write(html_header + HTML.encode('utf-8') + html_footer)
-			f.close
+			f.close()
 			print "Writing index.html..."
 		else:
 			print "Writing page" + str(page) + ".html"
 			f = open("page" + str(page) + ".html", "w")
 			f.write(html_header + HTML.encode('utf-8') + html_footer)
-			f.close
+			f.close()
 
 
 def main(argv=None):
