@@ -3,9 +3,6 @@
 # The python script that generates my blog from text files written in Markdown.
 # It is still very, *very* rudimentary, but it works.
 
-# Gustavo de Paula Ribeiro
-# github@mnmal.me
-
 from __future__ import division
 
 # Imports
@@ -13,8 +10,8 @@ import os
 import sys
 import time
 import glob
-from math import ceil
 import markdown2
+from math import ceil
 
 # Config Var(s)
 postsPerPage = 10
@@ -108,10 +105,10 @@ def createHTML(root_dir):
 		# write html file per page with the header, the body and the footer
 		# if it's the first page, calls it index.html, else calls it page#.html
 		if page == 1:
+			print "Writing index.html..."
 			with open("index.html", "w") as f:
 				f.write(html_header + HTML.encode('utf-8') + html_footer)
 
-			print "Writing index.html..."
 		else:
 			print "Writing page" + str(page) + ".html"
 			with open("page" + str(page) + ".html", "w") as f:
