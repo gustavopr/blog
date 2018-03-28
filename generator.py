@@ -39,7 +39,7 @@ def createPost(url, body):
 
 	# write the html file
 	with open(url, 'w') as f:
-		f.write(html_header + body.encode('utf-8') + html_footer)
+		f.write(html_header + body.encode('utf-8').decode('utf-8') + html_footer)
 
 def createHTML(root_dir):
 	# sort files by mtime
@@ -93,7 +93,7 @@ def createHTML(root_dir):
 			HTML = HTML + "<div id=\"index\"><a href=\"index.html\">previous page</a></div>"
 		elif page == int(ceil(totalPosts / postsPerPage)) and int(ceil(totalPosts / postsPerPage)) > 1:
 			HTML = HTML + "<div id=\"index\"><a href=\"page" + str(page - 1) + ".html\">previous page</a></div>"
-		elif page <> 1 and page <> 2 and int(ceil(totalPosts / postsPerPage)) > 1:
+		elif page != 1 and page != 2 and int(ceil(totalPosts / postsPerPage)) > 1:
 			HTML = HTML + "<div id=\"index\"><a href=\"page" + str(page - 1) + ".html\">previous page</a> - "
 			HTML = HTML + "<a href=\"page" + str(page + 1) + ".html\">next page</a><br />"
 			HTML = HTML + "</div>"
@@ -105,12 +105,12 @@ def createHTML(root_dir):
 		# write html file per page with the header, the body and the footer
 		# if it's the first page, calls it index.html, else calls it page#.html
 		if page == 1:
-			print "Writing index.html..."
+			print("Writing index.html...")
 			with open("index.html", "w") as f:
-				f.write(html_header + HTML.encode('utf-8') + html_footer)
+				f.write(html_header + HTML.encode('utf-8').decode('utf-8') + html_footer)
 
 		else:
-			print "Writing page" + str(page) + ".html"
+			print("Writing page" + str(page) + ".html")
 			with open("page" + str(page) + ".html", "w") as f:
 				f.write(html_header + HTML.encode('utf-8') + html_footer)
 
@@ -119,8 +119,8 @@ def main(argv=None):
 		argv = sys.argv
 
 	if len(argv) != 2:
-		print "Usage:"
-		print "python generator.py root-dir-for-the-text-files/"
+		print("Usage:")
+		print("python generator.py root-dir-for-the-text-files/")
 		sys.exit(2)
 
 	# define the root dir where the text files are 
@@ -130,4 +130,3 @@ def main(argv=None):
 
 if __name__ == '__main__':
 	main()
-
